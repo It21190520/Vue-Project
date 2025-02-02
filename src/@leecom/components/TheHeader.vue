@@ -1,15 +1,7 @@
 <template>
   <div class="my-1">
-    <div class="flex flex-col md:flex-row w-full justify-center items-center">
-      <img
-        class="header-logo md:order-1"
-      />
-      <div class="block text-center md:order-2 m-1">
-        <h2 class="text-center mb-0">Your Title</h2>
-      </div>
-    </div>
     <div class="flex flex-col md:flex-col w-full justify-center items-center">
-      <h3 class="text-center mb-0">Online fuel stock monitoring system</h3>
+      <h3 class="text-center mb-0">STATUS OF EFFLUENT PONDS AND UPLOADING TRACTORS</h3>
       <span
         class="flex flex-row md:flex-row w-full justify-center items-center mt-0.5"
       >
@@ -18,6 +10,15 @@
       </span>
     </div>
     <horizontal-menu />
+    <div class="flex flex-col md:flex-col w-full justify-center items-center">
+      <h3 class="text-center mb-0">09:19:38 25 January 2025</h3>
+      <span
+        class="flex flex-row md:flex-row w-full justify-center items-center mt-0.5"
+      >
+        <h6 class="text-center mb-0">
+        </h6>
+      </span>
+    </div>
   </div>
 </template>
 
