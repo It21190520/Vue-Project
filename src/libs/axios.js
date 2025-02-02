@@ -1,47 +1,32 @@
 import Vue from "vue";
-
-// axios
 import axios from "axios";
 
-const SERVER_URL = "https://scadanet.lk/apps/railways/api";
+// URL for pond status API
+const POND_STATUS_URL = "https://www.waternet.lk/apps/watawala/api/summary/pond-status";
 
-const ApiPublic = axios.create({
-  baseURL: SERVER_URL,
+// Create an Axios instance for API requests
+const ApiPondStatus = axios.create({
+  baseURL: POND_STATUS_URL,
   timeout: 60000,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-const ApiFileUpload = axios.create({
-  baseURL: SERVER_URL,
-  timeout: 20000,
-  headers: {
-    "Content-Type": "multipart/form-data",
-  },
-});
-
-
-const ApiAuth = axios.create({
-  baseURL: SERVER_URL,
-  timeout: 20000,
-  headers: {
-    'Content-Type': 'application/json'
+// Function to fetch pond status data
+const fetchPondStatus = async () => {
+  try {
+    const response = await ApiPondStatus.get();
+    console.log("Pond Status Data:", response?.data);
+    return response?.data;
+  } catch (error) {
+    console.error("Error fetching pond status:", error?.message || error);
+    throw error;
   }
-})
+};
 
-ApiAuth.interceptors.request.use((config) => {
-  let authUser = JSON.parse(localStorage.getItem('authUser'));
-  if (authUser != null) {
-    config.headers.token = authUser.token;
-  }
-  else {
-    config.headers.token = null;
-  }
+// Assign function to Vue prototype for global access
+Vue.prototype.$pondStatus = fetchPondStatus;
 
-  return config;
-}, (error) => Promise.reject(error));
-
-Vue.prototype.$http = ApiPublic;
-
-export { ApiAuth, ApiPublic, ApiFileUpload };
+// Exporting Axios instance and function for reuse
+export { fetchPondStatus, ApiPondStatus };
